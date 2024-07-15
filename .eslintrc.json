@@ -1,0 +1,43 @@
+{
+  "env": {
+    "es2020": true,
+    "node": true,
+    "jest": true
+  },
+  "ignorePatterns": ["dist/*"],
+  "plugins": ["node", "jest", "@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:node/recommended",
+    "plugin:jest/recommended",
+    "plugin:jest/style",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "prettier",
+    "prettier/@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 9,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "settings": {
+    "node": {
+      "tryExtensions": [".js", ".json", ".node", ".ts"]
+    }
+  },
+  "rules": {
+    "node/no-unsupported-features/es-syntax": 0,
+    "node/no-unsupported-features/es-builtins": 0,
+    "node/no-extraneous-import": [
+      "error",
+      {
+        "allowModules": ["@jest/globals"]
+      }
+    ]
+  }
+}

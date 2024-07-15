@@ -1,0 +1,123 @@
+name: "Copybara Action 2"
+description: "Transform and move code between repositories. Start with ZERO config and 100% customizable."
+author: "Romain Barissat"
+
+inputs:
+  ssh_key:
+    description: "SSH public key."
+    required: true
+
+  access_token:
+    description: "Personal access token with `repo` permissions. Always required on *destination*. Required on *SoT* only if the variable `sot_branch` below is left empty and to decide between **push** and **init** workflows."
+    required: false
+
+  sot_repo:
+    description: "Source repository (Source of Truth)."
+    required: false
+
+  sot_branch:
+    description: "SoT branch. Defaults to your repository's default branch."
+    required: false
+    default: ""
+
+  destination_repo:
+    description: "Destination repository."
+    required: false
+
+  destination_branch:
+    description: "Destination branch. Defaults to the same as your SoT's branch name."
+    required: false
+    default: ""
+
+  push_include:
+    description: "Files to include when pushing from SoT => Destination (space separated globs). Defaults to all files."
+    required: false
+    default: "**"
+
+  push_exclude:
+    description: "Files to exclude when pushing from SoT => Destination (space separated globs). Defaults to none."
+    required: false
+    default: ""
+
+  push_move:
+    description: "Files to move before pushing from SoT => Destination. In the format `from||to||match` where `match` is a glob filter to match only specific files within `from` (defaults to all). Separate each move operation by a line return. Defaults to reverse of `pr_move`. `push_move` is always run before `push_replace`."
+    required: false
+    default: ""
+
+  push_replace:
+    description: "Files to replace before pushing from SoT => Destination. In the format `search||replace||match` where `match` is a glob filter to search only those files (defaults to all). Separate each replace operation by a line return. Defaults to reverse of `pr_replace`. `push_replace` is always run after `push_move`."
+    required: false
+    default: ""
+
+  pr_include:
+    description: "Files to include when pulling from Destination => SoT (space separated globs). Defaults to all files."
+    required: false
+    default: "**"
+
+  pr_exclude:
+    description: "Files to exclude when pulling from Destination => SoT (space separated globs). Defaults to none."
+    required: false
+    default: ""
+
+  pr_move:
+    description: "Files to move before pushing from Destination => SoT. In the format `from||to||match` where `match` is a glob filter to match only specific files within `from` (defaults to all). Separate each move operation by a line return. Defaults to none. `pr_move` is always run after `pr_replace`."
+    required: false
+    default: ""
+
+  pr_replace:
+    description: "Files to replace before pushing from Destination => SoT. In the format `search||replace||match` where `match` is a glob filter to search only those files (defaults to all). Separate each replace operation by a line return. Defaults to none. `pr_replace` is always run before `pr_move`."
+    required: false
+    default: ""
+
+  committer:
+    description: "Who will commit changes."
+    required: false
+    default: Github Actions <actions@github.com>
+
+  custom_config:
+    description: "Copybara custom configuration file to use. Using this will ignore all the pr_* and push_* inputs."
+    required: false
+    default: ""
+
+  workflow:
+    description: "Workflow to execute. Defaults to auto-detect (init / push / pr)."
+    required: false
+    default: ""
+
+  copybara_options:
+    description: "Use this, if you want to manually specify some command line options (space-separated)."
+    required: false
+    default: ""
+
+  ssh_known_hosts:
+    description: "SSH known hosts file contents, for authenticating with Copybara with another Git server. GitHub is always included by default."
+    required: false
+    default: ""
+
+  copybara_image:
+    description: "Copybara Docker image to run."
+    required: false
+    default: "olivr/copybara"
+
+  copybara_image_tag:
+    description: "Copybara Docker image tag to use."
+    required: false
+    default: "latest"
+
+  pr_number:
+    description: "If you manually specified the 'pr' workflow, you will need to specify the PR number as well."
+    required: false
+    default: ""
+
+  create_repo:
+    description: "If the destination repo doesn't exist, it will be created (subject to enough permissions attached to the access token)."
+    required: false
+    default: "yes"
+
+runs:
+  using: "node12"
+  main: "dist/index.js"
+
+branding:
+  icon: "copy"
+  color: "purple"
