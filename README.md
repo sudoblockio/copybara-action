@@ -35,8 +35,3 @@ This action comes with sensible defaults to make it **very easy** for you to use
 ## 🔘 [All options](docs/inputs.md)
 
 ## 💚 [Contributing](docs/CONTRIBUTING.md)
-
-## 💬 Support
-
-- For questions about this action: [Join Oliv'r on Keybase](https://keybase.io/team/olivr)
-- For questions about Copybara: [Copybara's repo](https://github.com/google/copybara/)

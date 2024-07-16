@@ -35,7 +35,7 @@ export class GitHub {
       .then((res) => res.status == 200)
       .catch((err) => {
         if (err.status == 404) {
-          if (createRepo) return this.createRepo(owner, repo).then((res) => res.status == 200);
+          if (createRepo) return this.createRepo(owner, repo).then((res) => res.status==201 );
           else return false;
         } else throw err;
       });
