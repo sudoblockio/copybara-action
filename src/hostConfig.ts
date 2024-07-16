@@ -4,8 +4,6 @@ import { homedir } from "os";
 export class hostConfig {
   static gitConfigPath = homedir() + "/.gitconfig";
   static gitCredentialsPath = homedir() + "/.git-credentials";
-  static sshKeyPath = homedir() + "/.ssh/id_rsa";
-  static knownHostsPath = homedir() + "/.ssh/known_hosts";
   static cbConfigPath = homedir() + "/copy.bara.sky";
 
   static githubKnownHost =
@@ -28,10 +26,6 @@ export class hostConfig {
 
   static async saveAccessToken(accessToken: string): Promise<void> {
     return this.save(this.gitCredentialsPath, `https://user:${accessToken}@github.com`);
-  }
-
-  static async saveKnownHosts(knownHosts: string): Promise<void> {
-    return this.save(this.knownHostsPath, `${this.githubKnownHost}\n${knownHosts}`);
   }
 
   static async saveCopybaraConfig(config: string): Promise<void> {

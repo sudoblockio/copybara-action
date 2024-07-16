@@ -3,10 +3,6 @@ description: "Transform and move code between repositories"
 author: "Sudoblock"
 
 inputs:
-  ssh_key:
-    description: "SSH public key."
-    required: false
-
   access_token:
     description: "Personal access token with `repo` permissions. Always required on *destination*. Required on *SoT* only if the variable `sot_branch` below is left empty and to decide between **push** and **init** workflows."
     required: true
@@ -86,11 +82,6 @@ inputs:
 
   copybara_options:
     description: "Use this, if you want to manually specify some command line options (space-separated)."
-    required: false
-    default: ""
-
-  ssh_known_hosts:
-    description: "SSH known hosts file contents, for authenticating with Copybara with another Git server. GitHub is always included by default."
     required: false
     default: ""
 
