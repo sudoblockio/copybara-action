@@ -66,15 +66,10 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Get Docker image digest
-        id: digest
-        run: |
-          echo "DOCKER_IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' shreyasbhat0/copybara:$(echo ${{ steps.meta.outputs.tags }} | cut -d',' -f1))" >> $GITHUB_ENV
-
       - name: Install Cosign
         uses: sigstore/cosign-installer@main
-
       - name: Sign the image with GitHub OIDC **EXPERIMENTAL**
-        run: cosign sign --oidc-issuer https://token.actions.githubusercontent.com ${{ env.DOCKER_IMAGE_DIGEST }}
+        run: cosign sign --oidc-issuer https://token.actions.githubusercontent.com ${TAGS}
         env:
           COSIGN_EXPERIMENTAL: 1
+          TAGS: ${{ steps.meta.outputs.tags }}
