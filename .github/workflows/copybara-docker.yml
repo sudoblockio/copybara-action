@@ -57,7 +57,7 @@ jobs:
           password: ${{ github.token }}
 
       - name: Use working Dockerfile
-        run: curl -s https://raw.githubusercontent.com/google/copybara/main/.github/Dockerfile > Dockerfile
+        run: curl -s https://raw.githubusercontent.com/google/copybara/master/Dockerfile > Dockerfile
 
       - name: Build and push
         uses: docker/build-push-action@v2
