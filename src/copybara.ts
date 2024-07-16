@@ -45,7 +45,10 @@ export class CopyBara {
       this.generateTransformations(config.push.move, config.push.replace, "push"),
       this.generateInExcludes(config.pr.include),
       this.generateInExcludes(config.pr.exclude),
-      this.generateTransformations(config.pr.move, config.pr.replace, "pr")
+      this.generateTransformations(config.pr.move, config.pr.replace, "pr"),
+      config.prData.title,
+      config.prData.branchName,
+      config.prData.body
     );
   }
 
@@ -158,6 +161,14 @@ export type CopybaraConfig = {
   prNumber: string | number;
   createRepo: boolean;
   image: DockerConfig;
+
+  prData : PrConfig
+};
+
+export type PrConfig = {
+  branchName :string;
+  title:string;
+  body: string;
 };
 
 export type RepoConfig = {
