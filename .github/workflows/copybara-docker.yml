@@ -29,7 +29,7 @@ jobs:
         with:
           images: |
             shreyasbhat0/copybara
-            ghcr.io/shreyasbhat0/copybara
+            ghcr.io/sudoblockio/copybara
           tags: |
             type=raw,${{ env.COPYBARA_SHA }}
             type=schedule,pattern={{date 'YYYYMMDD'}}
