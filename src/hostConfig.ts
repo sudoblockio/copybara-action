@@ -30,10 +30,6 @@ export class hostConfig {
     return this.save(this.gitCredentialsPath, `https://user:${accessToken}@github.com`);
   }
 
-  static async saveSshKey(sshKey: string): Promise<void> {
-    return this.save(this.sshKeyPath, sshKey);
-  }
-
   static async saveKnownHosts(knownHosts: string): Promise<void> {
     return this.save(this.knownHostsPath, `${this.githubKnownHost}\n${knownHosts}`);
   }

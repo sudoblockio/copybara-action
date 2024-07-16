@@ -11,6 +11,8 @@ export class CopyBara {
   }
 
   public async run(workflow: string, copybaraOptions: string[], ref: string | number = ""): Promise<number> {
+
+    console.log(copybaraOptions);
     switch (workflow) {
       case "init":
         return this.exec(
@@ -32,9 +34,9 @@ export class CopyBara {
   public static getConfig(workflow: string, config: CopybaraConfig): string {
     this.validateConfig(config, workflow);
     return copyBaraSky(
-      `git@github.com:${config.sot.repo}.git`,
+      config.sot.repo,
       config.sot.branch,
-      `git@github.com:${config.destination.repo}.git`,
+      config.destination.repo,
       config.destination.branch,
       config.committer,
       "file:///usr/src/app",

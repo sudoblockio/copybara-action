@@ -139,7 +139,6 @@ export class CopybaraAction {
 
   async saveConfigFiles() {
     core.debug("Save config files");
-    await hostConfig.saveSshKey(this.config.sshKey);
     await hostConfig.saveAccessToken(this.config.accessToken);
     await hostConfig.saveCommitter(this.config.committer);
     await hostConfig.saveKnownHosts(this.config.knownHosts);
@@ -165,6 +164,5 @@ export class CopybaraAction {
 }
 
 interface CopybaraActionConfig extends CopybaraConfig {
-  sshKey: string;
   accessToken: string;
 }

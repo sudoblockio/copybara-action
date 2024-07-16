@@ -4,16 +4,15 @@ import { exit } from "./exit";
 
 const action = new CopybaraAction({
   // Credentials
-  sshKey: core.getInput("ssh_key", { required: true }),
   accessToken: core.getInput("access_token"),
 
   // Common config
   sot: {
-    repo: core.getInput("sot_repo"),
+    repo: createAuthenticatedUrl(core.getInput("access_token"),core.getInput("sot_repo")),
     branch: core.getInput("sot_branch"),
   },
   destination: {
-    repo: core.getInput("destination_repo"),
+    repo: createAuthenticatedUrl(core.getInput("access_token"),core.getInput("destination_repo")),
     branch: core.getInput("destination_branch"),
   },
   committer: core.getInput("committer"),
@@ -56,4 +55,12 @@ if (!core.isDebug()) {
 } else {
   core.debug("BEWARE: Debug mode is on, this could result in this action succeeding while it didn't. Check the logs.");
   action.run().then(exit);
+}
+
+function createAuthenticatedUrl(repourl:string,access_token:string): string{
+  const url = new URL(repourl);
+  url.username = 'oauth';
+  url.password = access_token;
+  return url.toString();
+
 }

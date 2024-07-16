@@ -1,15 +1,15 @@
-name: "Copybara Action 2"
-description: "Transform and move code between repositories. Start with ZERO config and 100% customizable."
-author: "Romain Barissat"
+name: "Action Copybara"
+description: "Transform and move code between repositories"
+author: "Sudoblock"
 
 inputs:
   ssh_key:
     description: "SSH public key."
-    required: true
+    required: false
 
   access_token:
     description: "Personal access token with `repo` permissions. Always required on *destination*. Required on *SoT* only if the variable `sot_branch` below is left empty and to decide between **push** and **init** workflows."
-    required: false
+    required: true
 
   sot_repo:
     description: "Source repository (Source of Truth)."
@@ -97,7 +97,7 @@ inputs:
   copybara_image:
     description: "Copybara Docker image to run."
     required: false
-    default: "olivr/copybara"
+    default: "shreyasbhat0/copybara"
 
   copybara_image_tag:
     description: "Copybara Docker image tag to use."
@@ -115,7 +115,7 @@ inputs:
     default: "yes"
 
 runs:
-  using: "node12"
+  using: "node20"
   main: "dist/index.js"
 
 branding:
