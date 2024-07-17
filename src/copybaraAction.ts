@@ -141,7 +141,6 @@ export class CopybaraAction {
     core.debug("Save config files");
     await hostConfig.saveAccessToken(this.config.accessToken);
     await hostConfig.saveCommitter(this.config.committer);
-    await hostConfig.saveKnownHosts(this.config.knownHosts);
     await hostConfig.saveCopybaraConfig(await this.getCopybaraConfig());
 
     // Upload Copybara config as an artifact

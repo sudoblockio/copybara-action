@@ -46,6 +46,11 @@ const action = new CopybaraAction({
     name: core.getInput("copybara_image"),
     tag: core.getInput("copybara_image_tag"),
   },
+  prData: {
+    branchName: core.getInput("pr_branch_name"),
+    title: core.getInput("pr_title"),
+    body: core.getInput("pr_body")
+  }
 });
 
 if (!core.isDebug()) {
