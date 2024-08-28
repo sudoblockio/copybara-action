@@ -10994,12 +10994,12 @@ exports.exitCodes = {
         type: "error",
     },
     52: {
-        msg: "Unexpected error running Copybara. Please open an issue on olivr/copybara-action.",
+        msg: "Unexpected error running Copybara. Please open an issue on sudoblockio/copybara-action.",
         ns: "action",
         type: "error",
     },
     53: {
-        msg: "Unexpected error. Please open an issue on olivr/copybara-action.",
+        msg: "Unexpected error. Please open an issue on sudoblockio/copybara-action.",
         ns: "action",
         type: "error",
     },
