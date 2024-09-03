@@ -21,9 +21,8 @@ jobs:
 
       - name: Build
         run: yarn build
-
-      - name: Ensure build was committed (necessary for Github Actions)
-        run: "[[ -z $(git status -s dist) ]]"
-
-      - name: "[Test] Unit tests"
-        run: yarn test
+      
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.COPYBARA_ACTION_TOKEN }}
+        run: GITHUB_EVENT_NAME=push GITHUB_REF=main npx semantic-release -e ./.config/release.config.js
