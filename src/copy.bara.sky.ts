@@ -35,8 +35,8 @@ PR_TRANSFORMATIONS = [${prTransformations}
 ]
 
 PR_BRANCH_NAME = "${prBranch}"
-PR_TITLE = "${prTitle}
-PR_BODY = "${prBody}
+PR_TITLE = "${prTitle}"
+PR_BODY = "${prBody}"
 
 # Push workflow
 core.workflow(
