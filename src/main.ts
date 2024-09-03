@@ -51,7 +51,10 @@ const action = new CopybaraAction({
     title: core.getInput("pr_title"),
     body: core.getInput("pr_body")
   }
+
 });
+console.log(action.config.pr.include)
+console.log(action.config.push.include)
 
 if (!core.isDebug()) {
   // Action fails gracefully on 'throw'

@@ -43071,13 +43071,11 @@ LOCAL_SOT = "${localSot}"
 
 PUSH_INCLUDE = [${pushInclude}]
 PUSH_EXCLUDE = [${pushExclude}]
-PUSH_TRANSFORMATIONS = [${pushTransformations}
-]
+PUSH_TRANSFORMATIONS = [${pushTransformations}]
 
-PR_INCLUDE = [${prInclude}]
+PR_INCLUDE = ["${prInclude}"]
 PR_EXCLUDE = [${prExclude}]
-PR_TRANSFORMATIONS = [${prTransformations}
-]
+PR_TRANSFORMATIONS = [${prTransformations}]
 
 PR_BRANCH_NAME = "${prBranch}"
 PR_TITLE = "${prTitle}"
@@ -43115,7 +43113,7 @@ core.workflow(
         destination_ref = SOT_BRANCH,
         pr_branch = PR_BRANCH_NAME,
         title = PR_TITLE,
-        body = PR_BODY
+        body = PR_BODY,
         integrates = [],
     ),
     destination_files = glob(PUSH_INCLUDE, exclude = PUSH_EXCLUDE),
@@ -43794,6 +43792,8 @@ const action = new copybaraAction_1.CopybaraAction({
         body: core.getInput("pr_body")
     }
 });
+console.log(action.config.pr.include);
+console.log(action.config.push.include);
 if (!core.isDebug()) {
     // Action fails gracefully on 'throw'
     process.on("unhandledRejection", (err) => (0, exit_1.exit)(53, err));
