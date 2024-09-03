@@ -14,16 +14,16 @@ export class CopyBara {
 
     console.log(copybaraOptions);
     switch (workflow) {
-      case "init":
+      case "push":
         return this.exec(
           ["-e", "COPYBARA_WORKFLOW=push"],
-          ["--force", "--init-history", "--ignore-noop", ...copybaraOptions]
+          ["--force", ...copybaraOptions]
         );
 
       case "pr":
         return this.exec(
           ["-e", "COPYBARA_WORKFLOW=pr", "-e", `COPYBARA_SOURCEREF=${ref}`],
-          ["--ignore-noop", ...copybaraOptions]
+          ["--force", ...copybaraOptions]
         );
 
       default:
@@ -103,6 +103,7 @@ export class CopyBara {
 
   private static generateInExcludes(inExcludesArray: string[]) {
     const inExcludeGlobs = inExcludesArray.filter((v) => v);
+    console.log(inExcludesArray)
     let inExcludeString = "";
 
     if (inExcludeGlobs.length) inExcludeString = `"${inExcludeGlobs.join('","')}"`;
@@ -129,7 +130,7 @@ export class CopyBara {
         const glob = path ? path : "**";
 
         transformation = transformation.concat(`
-        core.${method}("${from}", "${to}", paths = glob(["${glob}"])),`);
+        core.${method}("${from}", "${to}"),`);
       }
     });
 

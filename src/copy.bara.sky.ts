@@ -28,7 +28,7 @@ PUSH_INCLUDE = [${pushInclude}]
 PUSH_EXCLUDE = [${pushExclude}]
 PUSH_TRANSFORMATIONS = [${pushTransformations}]
 
-PR_INCLUDE = ["${prInclude}"]
+PR_INCLUDE = [${prInclude}]
 PR_EXCLUDE = [${prExclude}]
 PR_TRANSFORMATIONS = [${prTransformations}]
 
@@ -71,11 +71,9 @@ core.workflow(
         body = PR_BODY,
         integrates = [],
     ),
-    destination_files = glob(PUSH_INCLUDE, exclude = PUSH_EXCLUDE),
     origin_files = glob(PR_INCLUDE if PR_INCLUDE else ["**"], exclude = PR_EXCLUDE),
+    destination_files = glob(PUSH_INCLUDE, exclude = PUSH_EXCLUDE),
     authoring = authoring.pass_thru(default = COMMITTER),
-    mode = "CHANGE_REQUEST",
-    set_rev_id = False,
     transformations = [
         metadata.save_author("ORIGINAL_AUTHOR"),
         metadata.expose_label("GITHUB_PR_NUMBER", new_name = "Closes", separator = DESTINATION_REPO.replace("git@github.com:", " ").replace(".git", "#")),

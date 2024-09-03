@@ -43073,7 +43073,7 @@ PUSH_INCLUDE = [${pushInclude}]
 PUSH_EXCLUDE = [${pushExclude}]
 PUSH_TRANSFORMATIONS = [${pushTransformations}]
 
-PR_INCLUDE = ["${prInclude}"]
+PR_INCLUDE = [${prInclude}]
 PR_EXCLUDE = [${prExclude}]
 PR_TRANSFORMATIONS = [${prTransformations}]
 
@@ -43116,11 +43116,9 @@ core.workflow(
         body = PR_BODY,
         integrates = [],
     ),
-    destination_files = glob(PUSH_INCLUDE, exclude = PUSH_EXCLUDE),
     origin_files = glob(PR_INCLUDE if PR_INCLUDE else ["**"], exclude = PR_EXCLUDE),
+    destination_files = glob(PUSH_INCLUDE, exclude = PUSH_EXCLUDE),
     authoring = authoring.pass_thru(default = COMMITTER),
-    mode = "CHANGE_REQUEST",
-    set_rev_id = False,
     transformations = [
         metadata.save_author("ORIGINAL_AUTHOR"),
         metadata.expose_label("GITHUB_PR_NUMBER", new_name = "Closes", separator = DESTINATION_REPO.replace("git@github.com:", " ").replace(".git", "#")),
@@ -43165,10 +43163,10 @@ class CopyBara {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(copybaraOptions);
             switch (workflow) {
-                case "init":
-                    return this.exec(["-e", "COPYBARA_WORKFLOW=push"], ["--force", "--init-history", "--ignore-noop", ...copybaraOptions]);
+                case "push":
+                    return this.exec(["-e", "COPYBARA_WORKFLOW=push"], ["--force", ...copybaraOptions]);
                 case "pr":
-                    return this.exec(["-e", "COPYBARA_WORKFLOW=pr", "-e", `COPYBARA_SOURCEREF=${ref}`], ["--ignore-noop", ...copybaraOptions]);
+                    return this.exec(["-e", "COPYBARA_WORKFLOW=pr", "-e", `COPYBARA_SOURCEREF=${ref}`], ["--force", ...copybaraOptions]);
                 default:
                     return this.exec(["-e", `COPYBARA_WORKFLOW=${workflow}`], ["--ignore-noop", ...copybaraOptions]);
             }
@@ -43230,6 +43228,7 @@ class CopyBara {
     }
     static generateInExcludes(inExcludesArray) {
         const inExcludeGlobs = inExcludesArray.filter((v) => v);
+        console.log(inExcludesArray);
         let inExcludeString = "";
         if (inExcludeGlobs.length)
             inExcludeString = `"${inExcludeGlobs.join('","')}"`;
@@ -43251,7 +43250,7 @@ class CopyBara {
                 const [from, to = "", path] = item.split("||");
                 const glob = path ? path : "**";
                 transformation = transformation.concat(`
-        core.${method}("${from}", "${to}", paths = glob(["${glob}"])),`);
+        core.${method}("${from}", "${to}"),`);
             }
         });
         return transformation;
