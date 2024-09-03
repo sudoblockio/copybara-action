@@ -5,7 +5,16 @@
     "jest": true
   },
   "ignorePatterns": ["dist/*"],
-  "plugins": ["node", "jest", "@typescript-eslint"],
+  "plugins": ["node", "jest", "@typescript-eslint",
+"@semantic-release/commit-analyzer",
+      {
+        "preset": "eslint",
+        "releaseRules": [
+          { "tag": "Docs", "message": "*README*", "release": "patch" },
+          { "tag": "New", "release": "major" }
+        ]
+      }
+    ],
   "extends": [
     "eslint:recommended",
     "plugin:import/errors",
