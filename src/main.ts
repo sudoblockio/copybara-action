@@ -8,11 +8,11 @@ const action = new CopybaraAction({
 
   // Common config
   sot: {
-    repo: createAuthenticatedUrl(core.getInput("access_token"),core.getInput("sot_repo")),
+    repo: createAuthenticatedUrl(core.getInput("sot_repo"),core.getInput("access_token"),),
     branch: core.getInput("sot_branch"),
   },
   destination: {
-    repo: createAuthenticatedUrl(core.getInput("access_token"),core.getInput("destination_repo")),
+    repo: createAuthenticatedUrl(core.getInput("destination_repo"),core.getInput("access_token"),),
     branch: core.getInput("destination_branch"),
   },
   committer: core.getInput("committer"),
