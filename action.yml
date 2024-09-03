@@ -105,6 +105,22 @@ inputs:
     required: false
     default: "yes"
 
+  pr_branch_name:
+    description: "PR BRANCH NAME"
+    required: false
+    default: "sample PR"
+  
+  pr_title:
+    description: "PR TITLE NAME"
+    required: false
+    default: "sample PR title"
+
+  pr_body:
+    description: "PR BODY"
+    required: false
+    default: "sample PR BODy"
+
+
 runs:
   using: "node20"
   main: "dist/index.js"
