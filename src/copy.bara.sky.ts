@@ -59,9 +59,9 @@ core.workflow(
 # Pull Request workflow
 core.workflow(
     name = "pr",
-    origin = git.github_pr_origin(
+    origin = git.origin(
         url = DESTINATION_REPO,
-        branch = DESTINATION_BRANCH,
+        ref = DESTINATION_BRANCH,
     ),
     destination = git.github_pr_destination(
         url = SOT_REPO,

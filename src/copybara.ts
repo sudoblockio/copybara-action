@@ -17,7 +17,7 @@ export class CopyBara {
       case "push":
         return this.exec(
           ["-e", "COPYBARA_WORKFLOW=push"],
-          ["--force", ...copybaraOptions]
+          ["--force", "--init-history", ...copybaraOptions]
         );
 
       case "pr":
