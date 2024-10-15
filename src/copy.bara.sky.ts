@@ -60,12 +60,12 @@ core.workflow(
 core.workflow(
     name = "pr",
     origin = git.origin(
-        url = DESTINATION_REPO,
-        ref = DESTINATION_BRANCH,
+        url = SOT_REPO,
+        ref = SOT_BRANCH,
     ),
     destination = git.github_pr_destination(
-        url = SOT_REPO,
-        destination_ref = SOT_BRANCH,
+        url = DESTINATION_REPO,
+        destination_ref = DESTINATION_BRANCH,
         pr_branch = PR_BRANCH_NAME,
         title = PR_TITLE,
         body = PR_BODY,
@@ -76,7 +76,7 @@ core.workflow(
     authoring = authoring.pass_thru(default = COMMITTER),
     transformations = [
         metadata.save_author("ORIGINAL_AUTHOR"),
-        metadata.expose_label("GITHUB_PR_NUMBER", new_name = "Closes", separator = DESTINATION_REPO.replace("git@github.com:", " ").replace(".git", "#")),
+        metadata.expose_label("GITHUB_PR_NUMBER", new_name = "Closes", separator = SOT_REPO.replace("git@github.com:", " ").replace(".git", "#")),
     ] + PR_TRANSFORMATIONS,
 )
 `;
