@@ -42594,7 +42594,7 @@ core.workflow(
     name = "pr",
     origin = git.github_pr_origin(
         url = SOT_REPO,
-        ref = SOT_BRANCH,
+        branch = SOT_BRANCH,
     ),
     destination = git.github_pr_destination(
         url = DESTINATION_REPO,
