@@ -59,7 +59,7 @@ core.workflow(
 # Pull Request workflow
 core.workflow(
     name = "pr",
-    origin = git.origin(
+    origin = git.github_pr_origin(
         url = SOT_REPO,
         ref = SOT_BRANCH,
     ),
