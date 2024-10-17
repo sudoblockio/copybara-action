@@ -42607,7 +42607,8 @@ core.workflow(
     origin_files = glob(PR_INCLUDE if PR_INCLUDE else ["**"], exclude = PR_EXCLUDE),
     destination_files = glob(PUSH_INCLUDE, exclude = PUSH_EXCLUDE),
     authoring = authoring.pass_thru(default = COMMITTER),
-    mode = "ITERATIVE",
+    mode = "CHANGE_REQUEST_FROM_SOT",
+    set_rev_id = False,
     transformations = [
         metadata.save_author("ORIGINAL_AUTHOR"),
         metadata.expose_label("GITHUB_PR_NUMBER", new_name = "Closes", separator = SOT_REPO.replace("git@github.com:", " ").replace(".git", "#")),
@@ -42655,7 +42656,7 @@ class CopyBara {
                 case "push":
                     return this.exec(["-e", "COPYBARA_WORKFLOW=push"], ["--force", "--init-history", ...copybaraOptions]);
                 case "pr":
-                    return this.exec(["-e", "COPYBARA_WORKFLOW=pr", "-e", `COPYBARA_SOURCEREF=${ref}`], ["--force", "--last-rev 1", ...copybaraOptions]);
+                    return this.exec(["-e", "COPYBARA_WORKFLOW=pr", "-e", `COPYBARA_SOURCEREF=${ref}`], ["--force", ...copybaraOptions]);
                 default:
                     return this.exec(["-e", `COPYBARA_WORKFLOW=${workflow}`], ["--ignore-noop", ...copybaraOptions]);
             }
