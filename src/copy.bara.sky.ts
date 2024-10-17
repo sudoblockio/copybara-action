@@ -75,7 +75,6 @@ core.workflow(
     destination_files = glob(PUSH_INCLUDE, exclude = PUSH_EXCLUDE),
     authoring = authoring.pass_thru(default = COMMITTER),
     mode = "ITERATIVE",
-    set_rev_id = False,
     transformations = [
         metadata.save_author("ORIGINAL_AUTHOR"),
         metadata.expose_label("GITHUB_PR_NUMBER", new_name = "Closes", separator = SOT_REPO.replace("git@github.com:", " ").replace(".git", "#")),
