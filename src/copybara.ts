@@ -23,7 +23,7 @@ export class CopyBara {
       case "pr":
         return this.exec(
           ["-e", "COPYBARA_WORKFLOW=pr", "-e", `COPYBARA_SOURCEREF=${ref}`],
-          ["--force", ...copybaraOptions]
+          ["--force","--last-rev","-15", ...copybaraOptions]
         );
 
       default:
