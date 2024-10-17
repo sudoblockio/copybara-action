@@ -42655,7 +42655,7 @@ class CopyBara {
                 case "push":
                     return this.exec(["-e", "COPYBARA_WORKFLOW=push"], ["--force", "--init-history", ...copybaraOptions]);
                 case "pr":
-                    return this.exec(["-e", "COPYBARA_WORKFLOW=pr", "-e", `COPYBARA_SOURCEREF=${ref}`], ["--force", "--last-rev", ...copybaraOptions]);
+                    return this.exec(["-e", "COPYBARA_WORKFLOW=pr", "-e", `COPYBARA_SOURCEREF=${ref}`], ["--force", "--last-rev 1", ...copybaraOptions]);
                 default:
                     return this.exec(["-e", `COPYBARA_WORKFLOW=${workflow}`], ["--ignore-noop", ...copybaraOptions]);
             }
