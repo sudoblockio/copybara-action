@@ -74,8 +74,7 @@ core.workflow(
     origin_files = glob(PR_INCLUDE if PR_INCLUDE else ["**"], exclude = PR_EXCLUDE),
     destination_files = glob(PUSH_INCLUDE, exclude = PUSH_EXCLUDE),
     authoring = authoring.pass_thru(default = COMMITTER),
-    mode = "CHANGE_REQUEST",
-    set_rev_id = False,
+    mode = "ITERATIVE",
     transformations = [
         metadata.save_author("ORIGINAL_AUTHOR"),
         metadata.expose_label("GITHUB_PR_NUMBER", new_name = "Closes", separator = SOT_REPO.replace("git@github.com:", " ").replace(".git", "#")),
